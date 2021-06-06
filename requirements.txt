@@ -1,0 +1,12 @@
+# 需要用到的包和环境
+# 本项目采用pycharm进行编写，使用miniconda进行包管理，与环境搭建
+# python版本：3.8.5
+# 用到的包以及其版本：
+keras	2.4.3
+moviepy	1.0.3
+numpy	1.18.5
+oauthlib	3.1.0
+opencv-python	3.4.10.37
+pip	20.2.4
+pygame	2.0.1
+tensorflow-cpu	2.2.0
