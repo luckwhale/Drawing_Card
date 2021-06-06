@@ -9,12 +9,13 @@ from chouka import *
 from config import *
 from recognize import recognize
 
+
 # 声明全局变量
-#global number  # 用于记录算命结果
+global number  # 用于记录算命结果
 
 
 # 创立初始界面
-class BaseDesk():
+class BaseDesk:
     def __init__(self, master):
         self.root = master
         self.root.config()
@@ -25,7 +26,7 @@ class BaseDesk():
 
 
 # 初始界面的设置
-class InitFace():
+class InitFace:
     def __init__(self, master):
         self.master = master
         self.master.config()
@@ -65,14 +66,14 @@ class InitFace():
         lable4.pack(side="left")
 
     # 用于切换至下一个界面
-    def change(self, ):
+    def change(self):
         self.initface01.destroy()
         self.initface02.destroy()
         Face1(self.master)
 
 
 # 中间界面，用于显示算命结果
-class Face1():
+class Face1:
     def __init__(self, master):
         self.master = master
         self.number = number
@@ -91,13 +92,13 @@ class Face1():
             lable22.pack()
 
     # 用于切换至抽卡页面
-    def begin(self, ):
+    def begin(self):
         self.face1.destroy()
         Face2(self.master)
 
 
 # 抽卡页面
-class Face2():
+class Face2:
     def __init__(self, master):
         self.master = master
         self.number = number

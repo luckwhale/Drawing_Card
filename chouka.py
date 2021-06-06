@@ -5,7 +5,7 @@
 # @Software: PyCharm
 import random
 from tkinter import *
-from Video import shipin
+from video import shipin
 import multiprocessing
 from music_player import voice
 from config import *
