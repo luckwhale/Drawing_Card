@@ -19,7 +19,7 @@ class BaseDesk:
     def __init__(self, master):
         self.root = master
         self.root.config()
-        self.root.title('Genshin Impact Get Cards')
+        self.root.title('Genshin Impact Draw Cards')
         self.root.geometry('400x300')
 
         InitFace(self.root)
@@ -77,6 +77,7 @@ class Face1:
     def __init__(self, master):
         self.master = master
         self.number = number
+        # 调用master的构造函数？
         self.master.config()
         self.face1 = tk.Frame(self.master, )
         self.face1.pack(side='top')
@@ -112,7 +113,7 @@ class Face2:
 
         self.character = tk.PhotoImage(file='./data/chouka/youla_chouka.gif')
         self.lable21 = tk.Label(self.face2, image=self.character)
-        # 为了保持对图片的引用而不被回收
+        # 为了保持对图片的引用而不被回收,这里用了self.character以后其实可以不写了,在此提醒一下
         self.lable21.image = self.character
         self.lable21.pack(side='top')
 
@@ -151,7 +152,8 @@ class Face2:
 # 主进程
 if __name__ == '__main__':
     global number
-    number = recognize()
+    #number = recognize()
+    number = 1
     root = tk.Tk()
     BaseDesk(root)
     root.mainloop()

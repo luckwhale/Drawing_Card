@@ -4,7 +4,6 @@
 # @File : train_data.py
 # @Software: PyCharm
 import random
-import numpy as np
 from sklearn.model_selection import train_test_split
 from keras_preprocessing.image import ImageDataGenerator  # 数据增强
 from keras.models import Sequential
