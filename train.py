@@ -125,22 +125,22 @@ class Model:
         self.model.add(Activation('relu'))  # 2 激活函数层
 
 
-        self.model.add(MaxPooling2D(pool_size=(2, 2)))  # 5 池化层
-        self.model.add(Dropout(0.25))  # 6 Dropout层
+        self.model.add(MaxPooling2D(pool_size=(2, 2)))  # 3 池化层
+        self.model.add(Dropout(0.25))  # 4 Dropout层
 
-        self.model.add(Conv2D(128, 3, 3, padding='SAME'))  # 7  2维卷积层
-        self.model.add(Activation('relu'))  # 8  激活函数层
+        self.model.add(Conv2D(128, 3, 3, padding='SAME'))  # 5  2维卷积层
+        self.model.add(Activation('relu'))  # 6  激活函数层
 
 
-        self.model.add(MaxPooling2D(pool_size=(2, 2)))  # 11 池化层
-        self.model.add(Dropout(0.25))  # 12 Dropout层
+        self.model.add(MaxPooling2D(pool_size=(2, 2)))  # 7 池化层
+        self.model.add(Dropout(0.25))  # 8 Dropout层
 
-        self.model.add(Flatten())  # 13 Flatten层
-        self.model.add(Dense(1024))  # 14 Dense层,又被称作全连接层
-        self.model.add(Activation('relu'))  # 15 激活函数层
-        self.model.add(Dropout(0.5))  # 16 Dropout层
-        self.model.add(Dense(nb_classes))  # 17 Dense层
-        self.model.add(Activation('softmax'))  # 18 分类层，输出最终结果
+        self.model.add(Flatten())  # 9 Flatten层
+        self.model.add(Dense(1024))  # 10 Dense层,又被称作全连接层
+        self.model.add(Activation('relu'))  # 11 激活函数层
+        self.model.add(Dropout(0.5))  # 12 Dropout层
+        self.model.add(Dense(nb_classes))  # 13 Dense层
+        self.model.add(Activation('softmax'))  # 14 分类层，输出最终结果
 
         # 输出模型概况
         self.model.summary()
