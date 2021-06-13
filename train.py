@@ -38,25 +38,6 @@ class Dataset:
         # 当前库采用的维度顺序
         self.input_shape = None
 
-class Dataset:
-    def __init__(self, path_name):
-        # 训练集
-        self.train_images = None
-        self.train_labels = None
-
-        # 验证集
-        self.valid_images = None
-        self.valid_labels = None
-
-        # 测试集
-        self.test_images = None
-        self.test_labels = None
-
-        # 数据集加载路径
-        self.path_name = path_name
-
-        # 当前库采用的维度顺序
-        self.input_shape = None
 
     # 加载数据集并按照交叉验证的原则划分数据集并进行相关预处理工作
     def load(self, img_rows=IMAGE_SIZE, img_cols=IMAGE_SIZE,
@@ -64,6 +45,7 @@ class Dataset:
         # 加载数据集到内存
         images, labels = load_dataset(self.path_name)
 
+        # 划分数据集
         train_images, valid_images, train_labels, valid_labels = train_test_split(images, labels, test_size=0.3,
                                                                                   random_state=random.randint(0, 100))
         _, test_images, _, test_labels = train_test_split(images, labels, test_size=0.5,
@@ -115,7 +97,6 @@ class Model:
         self.model = None
 
         # 建立模型
-
     def build_model(self, dataset, nb_classes=2):
         # 构建一个空的网络模型，它是一个线性堆叠模型，各神经网络层会被顺序添加，专业名称为序贯模型或线性堆叠模型
         self.model = Sequential()
@@ -144,12 +125,19 @@ class Model:
 
         # 输出模型概况
         self.model.summary()
+
+        # batch_size 一次训练用到的样本数
+        # epochs 是训练的代数
     def train(self, dataset, batch_size=10, epochs=10, data_augmentation=True):
-        sgd = SGD(lr=0.01, decay=1e-6,
-                  momentum=0.9, nesterov=True)  # 采用SGD+momentum的优化器进行训练，首先生成一个优化器对象
-        self.model.compile(loss='categorical_crossentropy',
-                           optimizer=sgd,
-                           metrics=['accuracy'])  # 完成实际的模型配置工作
+        # SGD 是 Stochastic Gradient Descent 翻译成人话 随机梯度下降法
+        # lr 是learning rate 学习率
+        # decay 衰减，防止过拟合
+        # momentum 加速收敛
+        # nesterov 是一个算法，有兴趣百度一下
+        sgd = SGD(lr=0.01, decay=1e-6,momentum=0.9, nesterov=True)
+        # 采用SGD+momentum的优化器进行训练，首先生成一个优化器对象
+        self.model.compile(loss='categorical_crossentropy',optimizer=sgd,metrics=['accuracy'])
+        # 完成实际的模型配置工作
 
         # 不使用数据提升，所谓的提升就是从我们提供的训练数据中利用旋转、翻转、加噪声等方法创造新的
         # 训练数据，有意识的提升训练数据规模，增加模型训练量
@@ -230,7 +218,7 @@ if __name__ == '__main__':
     model.save_model(file_path='zyk.face.model.h5')
 
 
-
+"""
 if __name__ == '__main__':
     dataset = Dataset('./data/')
     dataset.load()
@@ -239,3 +227,4 @@ if __name__ == '__main__':
     model = Model()
     model.load_model(file_path='zyk.face.model.h5')
     model.evaluate(dataset)
+"""
