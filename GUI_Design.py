@@ -152,7 +152,7 @@ class Face2:
 # 主进程
 if __name__ == '__main__':
     global number
-    #number = recognize()
+    number = recognize()
     number = 1
     root = tk.Tk()
     BaseDesk(root)

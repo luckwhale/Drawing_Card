@@ -24,31 +24,34 @@ def CatchPICFromVideo(window_name, catch_pic_num, path_name):
         if not ok:
             break
 
-            # 将当前帧转换成灰度图像,注意是一帧一帧的处理的
+            # 将当前帧转换成灰度图像,注意CV的格式式BGR的
         grey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        # 人脸检测，1.2和2分别为图片缩放比例和需要检测的有效点数
+        # 人脸检测
+        # scaleFactor是图像尺寸减小比例，minNeighbors是最少检测成功几次才算被识别，minsize是目标（人脸）的最小尺寸
         faceRects = classfier.detectMultiScale(grey, scaleFactor=1.2, minNeighbors=3, minSize=(32, 32))
         if len(faceRects) > 0:  # 大于0则检测到了人脸
             for faceRect in faceRects:  # 单独框出每一张人脸
                 x, y, w, h = faceRect
-                # cv2.rectangle(frame, (x - 10, y - 10), (x + w + 10, y + h + 10), color, 2)在矩形区域内显示
+                # 画一个矩形
+                # cv2.rectangle(frame, (x - 10, y - 10), (x + w + 10, y + h + 10), color, 2)
                 # 将当前帧保存为图片
                 img_name = '%s/%d.jpg' % (path_name, num)
                 image = frame[y - 10: y + h + 10, x - 10: x + w + 10]
                 cv2.imwrite(img_name, image)
                 num += 1
-                if num > (catch_pic_num):  # 如果超过指定最大保存数量退出循环
+                if num > catch_pic_num:  # 如果超过指定最大保存数量退出循环
                     break
                 # 画出矩形框
                 cv2.rectangle(frame, (x - 10, y - 10), (x + w + 10, y + h + 10), color, 2)
 
-                # 显示当前捕捉到了多少人脸图片了，这样站在那里被拍摄时心里有个数，不用两眼一抹黑傻等着
+                # 显示当前捕捉到了多少人脸图片了
                 font = cv2.FONT_HERSHEY_SIMPLEX
-                cv2.putText(frame, 'num:%d' % (num), (x + 30, y + 30), font, 1, (255, 0, 255), 4)
+                cv2.putText(frame, 'num:%d' % num, (x + 30, y + 30), font, 1, (255, 0, 255), 4)
 
         # 超过指定最大保存数量结束程序
-        if num > (catch_pic_num): break
+        if num > catch_pic_num:
+            break
 
         # 显示图像
         cv2.imshow(window_name, frame)
@@ -65,4 +68,4 @@ if __name__ == '__main__':
     if len(sys.argv) != 1:
         print("Usage:%s camera_id face_num_max path_name\r\n" % (sys.argv[0]))
     else:
-        CatchPICFromVideo("截取人脸", 600, 'C:\\Users\\lglin\\PycharmProjects\\pythonProject1\\data\\Other_Picture')
+        CatchPICFromVideo("get_face", 600, 'C:\\Users\\lglin\\PycharmProjects\\pythonProject1\\data\\Other_Picture')
