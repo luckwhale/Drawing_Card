@@ -83,6 +83,7 @@ def add(star, lb2):
     have.append(star)  # 将抽到的内容加入背包
     lb2_text = "原石：" + '%d' % stone
     lb2.config(text=lb2_text)
+    # 由于游戏是一次性的，选择不将结果存在文件中，想存的可以放开注释
     # with open('./data/Record/history', 'w') as f:
     # f.write(star + '\n')
     # f.close()
@@ -167,39 +168,3 @@ def minimum_guarantee(root):
 # 用于实现鼠标右键打开菜单
 # def popupmenu(event):
 #    mainmenu.post(event.x_root, event.y_root)
-
-"""
-if __name__ == '__main__':
-    root = Tk()
-    root.title('菜单实验')
-    root.geometry('320x240')
-
-    lb2_text = "原石：" + '%d' % stone
-    lb2 = Label(root, text=lb2_text, font=('宋体', 32, 'bold'))
-    lb2.place(relx=0.8, rely=0.1)
-    single_button = Button(root, text='单抽', font=('宋体', 24, 'bold'), command=single)
-    single_button.place(relx=0.7, rely=0.8)
-    ten_button = Button(root, text='十连', font=('宋体', 24, 'bold'), command=ten)
-    ten_button.place(relx=0.8, rely=0.8)
-
-    # 菜单部分
-    mainmenu = Menu(root)
-    menuFile = Menu(mainmenu)  # 菜单分组 menuFile
-    mainmenu.add_cascade(label="充值", menu=menuFile, font=('宋体', 16, 'bold'))
-    menuFile.add_command(label="648", command=big_money, font=('宋体', 16, 'bold'))
-    menuFile.add_command(label="324", command=small_money, font=('宋体', 16, 'bold'))
-    menuFile.add_command(label="剩余金额", command=remain_money, font=('宋体', 16, 'bold'))
-    menuFile.add_separator()  # 分割线
-    menuFile.add_command(label="退出", command=root.destroy, font=('宋体', 16, 'bold'))
-
-    menuEdit = Menu(mainmenu)  # 菜单分组 menuEdit
-    mainmenu.add_cascade(label="历史记录", menu=menuEdit, font=('宋体', 16, 'bold'))
-    menuEdit.add_command(label="5星", command=five_star, font=('宋体', 16, 'bold'))
-    menuEdit.add_command(label="4星", command=four_star, font=('宋体', 16, 'bold'))
-    menuEdit.add_command(label="抽卡记录", command=history_record(), font=('宋体', 16, 'bold'))
-    menuEdit.add_command(label="保底查询", command=minimum_guarantee(root), font=('宋体', 16, 'bold'))
-
-    root.config(menu=mainmenu)
-    root.bind('Button-3', popupmenu)  # 根窗体绑定鼠标右击响应事件
-    root.mainloop()
-"""
