@@ -10,8 +10,10 @@ from music_player import voice
 
 
 def shipin():
+    # 这部分主要是测试多进程用的可以删掉
     cap = cv2.VideoCapture('./Video/5star.mp4')
     print('进程pid=%d' % (os.getpid()))
+
 
     while (cap.isOpened()):
         ret, frame = cap.read()

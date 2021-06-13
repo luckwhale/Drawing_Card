@@ -7,7 +7,7 @@ import cv2
 import sys
 from train import Model
 
-
+# 这部分是专门为了GUI而修改的识别函数
 def recognize():
     import cv2
     from train import Model

@@ -10,10 +10,6 @@ from config import *
 from recognize import recognize
 
 
-# 声明全局变量
-global number  # 用于记录算命结果
-
-
 # 创立初始界面
 class BaseDesk:
     def __init__(self, master):
@@ -50,6 +46,7 @@ class InitFace:
         btn04 = tk.Checkbutton(self.initface01, text='优菈', padx='2', bg='blue', font=('Arial', 12), width=40, height=2,
                                command=self.change)
         btn04.pack(side='left', anchor='nw', expand="no")
+        # tkinter只能使用gif
         self.klee = tk.PhotoImage(file='./data/genshin/klee.gif')
         self.ganyu = tk.PhotoImage(file='./data/genshin/ganyu.gif')
         self.hutao = tk.PhotoImage(file='./data/genshin/hutao.gif')
@@ -75,26 +72,26 @@ class InitFace:
 # 中间界面，用于显示算命结果
 class Face1:
     def __init__(self, master):
+        global number
         self.master = master
         self.number = number
-        # 调用master的构造函数？
         self.master.config()
-        self.face1 = tk.Frame(self.master, )
-        self.face1.pack(side='top')
-        btn_chouka = tk.Button(self.face1, text='抽卡开始，祝你好运', command=self.begin)
+        self.face11 = tk.Frame(self.master, )
+        self.face11.pack(side='top')
+        btn_chouka = tk.Button(self.face11, text='抽卡开始，祝你好运', command=self.begin)
         btn_chouka.pack(side="top")
         if self.number == 1:
             self.ouhuang = tk.PhotoImage(file='./data/outlook/ouhuang.gif')
-            lable21 = tk.Label(self.face1, image=self.ouhuang)
+            lable21 = tk.Label(self.face11, image=self.ouhuang)
             lable21.pack()
         else:
             self.feiqiu = tk.PhotoImage(file='./data/outlook/feiqiu.gif')
-            lable22 = tk.Label(self.face1, image=self.feiqiu)
+            lable22 = tk.Label(self.face11, image=self.feiqiu)
             lable22.pack()
 
     # 用于切换至抽卡页面
     def begin(self):
-        self.face1.destroy()
+        self.face11.destroy()
         Face2(self.master)
 
 
@@ -105,22 +102,22 @@ class Face2:
         self.number = number
         self.master.config()
         # 用于显示界面
-        self.face2 = tk.Frame(self.master, )
-        self.face2.pack(side='top')
+        self.face21 = tk.Frame(self.master, )
+        self.face21.pack(side='top')
         # 用于显示按钮
         self.face3 = tk.Frame(self.master, )
         self.face3.pack(side='top')
 
         self.character = tk.PhotoImage(file='./data/chouka/youla_chouka.gif')
-        self.lable21 = tk.Label(self.face2, image=self.character)
-        # 为了保持对图片的引用而不被回收,这里用了self.character以后其实可以不写了,在此提醒一下
+        self.lable21 = tk.Label(self.face21, image=self.character)
+        # 为了保持对图片的引用而不被python回收,这里用了self.character以后其实可以不写了,在此提醒一下
         self.lable21.image = self.character
         self.lable21.pack(side='top')
 
         # 按钮设置
         # 加入lambda可以使用有参数的command
         self.lb2_text = "原石：" + '%d' % stone
-        self.lb2 = Label(self.face2, text=self.lb2_text, font=('宋体', 24, 'bold'))
+        self.lb2 = Label(self.face21, text=self.lb2_text, font=('宋体', 24, 'bold'))
         self.lb2.place(relx=0.6, rely=0)
         self.ten_button = Button(self.face3, text='十连', font=('宋体', 24, 'bold'), command=lambda: ten(self.lb2))
         self.ten_button.grid(row=1, column=5, padx=20, pady=10)
@@ -152,8 +149,8 @@ class Face2:
 # 主进程
 if __name__ == '__main__':
     global number
+    # 0 是非酋，1是欧皇
     number = recognize()
-    number = 1
     root = tk.Tk()
     BaseDesk(root)
     root.mainloop()
