@@ -1,7 +1,0 @@
-# -*- coding = utf-8 -*-
-# @Time : 2021/5/25 15:54
-# Author : ZYK
-# @File : chouka.py
-# @Software: PyCharm
-for i in range(0,10):
-    print(i)

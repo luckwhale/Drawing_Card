@@ -3,7 +3,6 @@
 # Author : ZYK
 # @File : load_data.py
 # @Software: PyCharm
-
 import os
 import sys
 import numpy as np
@@ -60,10 +59,6 @@ def read_path(path_name):
             if dir_item.endswith('.jpg'):
                 image = cv2.imread(full_path)
                 image = resize_image(image, IMAGE_SIZE, IMAGE_SIZE)
-
-                # 放开这个代码，可以看到resize_image()函数的实际调用效果
-                #cv2.imwrite('1.jpg', image)
-
                 images.append(image)
                 labels.append(path_name)
 
@@ -75,8 +70,7 @@ def load_dataset(path_name):
     images, labels = read_path(path_name)
 
     # 将输入的所有图片转成四维数组，尺寸为(图片数量*IMAGE_SIZE*IMAGE_SIZE*3)
-    # 我和闺女两个人共1200张图片，IMAGE_SIZE为64，故对我来说尺寸为1200 * 64 * 64 * 3
-    # 图片为64 * 64像素,一个像素3个颜色值(RGB)
+    # 图片为128 * 128像素,一个像素3个颜色值(RGB)
     images = np.array(images)
     print(images.shape)
 
