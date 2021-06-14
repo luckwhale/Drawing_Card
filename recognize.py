@@ -4,13 +4,11 @@
 # @File : recognize.py
 # @Software: PyCharm
 import cv2
-import sys
 from train import Model
+
 
 # 这部分是专门为了GUI而修改的识别函数
 def recognize():
-    import cv2
-    from train import Model
     global faceID
     # 加载模型
     model = Model()
@@ -36,8 +34,6 @@ def recognize():
         # 使用人脸识别分类器，读入分类器
         cascade = cv2.CascadeClassifier(cascade_path)
 
-
-
         # 利用分类器识别出哪个区域为人脸
         faceRects = cascade.detectMultiScale(frame_gray, scaleFactor=1.2, minNeighbors=3, minSize=(32, 32))
         if len(faceRects) > 0:
@@ -48,7 +44,7 @@ def recognize():
                 image = frame[y - 10: y + h + 10, x - 10: x + w + 10]
                 faceID = model.face_predict(image)
                 flag = flag + 1
-                if faceID ==1:
+                if faceID == 1:
                     answer = 1
                 # 释放摄像头并销毁所有窗口
         if flag > 10:

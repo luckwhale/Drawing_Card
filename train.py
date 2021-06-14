@@ -207,7 +207,7 @@ class Model:
 
         # 返回类别预测结果
         return result[0]
-
+"""
 if __name__ == '__main__':
     dataset = Dataset('./data/')
     dataset.load()
@@ -216,7 +216,7 @@ if __name__ == '__main__':
     model.build_model(dataset)
     model.train(dataset)
     model.save_model(file_path='zyk.face.model.h5')
-
+"""
 
 """
 if __name__ == '__main__':
