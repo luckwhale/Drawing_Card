@@ -5,7 +5,6 @@
 # @Software: PyCharm
 import pygame as py
 
-
 def voice():
     py.mixer.init()
     # 文件加载

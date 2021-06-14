@@ -20,20 +20,26 @@ def single(lb2):
     global this_time5
     global stone
     global number
+    global status
+    global star_status
 
     stone = stone - 60
     i = random.random()
     times = times + 1
     this_time4 = this_time4 + 1
+    num = 0
     if i < 0.006 * (number + 0.5) or times == 90:  # 五星中奖概率为0.6%
         a = random.random()
-        p1 = multiprocessing.Process(target=shipin)
-        p2 = multiprocessing.Process(target=voice)
-        p1.start()
-        p2.start()
-        p1.join()
-        p1.terminate()
-        p2.terminate()
+        star_status = 5
+        if status :
+            num = 5
+            p1 = multiprocessing.Process(target=shipin(num))
+            p2 = multiprocessing.Process(target=voice)
+            p1.start()
+            p2.start()
+            p1.join()
+            p1.terminate()
+            p2.terminate()
         if a < 0.5 or this_time5:
             star = st5[0]
             have5.append(star)
@@ -47,19 +53,45 @@ def single(lb2):
             times = 0
 
     elif i < 0.031 * (number + 0.5) or this_time4 == 10:  # 四星角色概率为2.55%
+        if status:
+            num = 4
+            p1 = multiprocessing.Process(target=shipin(num))
+            p2 = multiprocessing.Process(target=voice)
+            p1.start()
+            p2.start()
+            p1.join()
+            p1.terminate()
+            p2.terminate()
         cha = random.randint(0, len(cha_4) - 1)
         star = cha_4[cha]
         have4.append(star)
         this_time4 = 0
     elif i < 0.056 * (number + 0.5) or this_time4 == 10:  # 四星武器概率为2.55%
+        if status:
+            num = 4
+            p1 = multiprocessing.Process(target=shipin(num))
+            p2 = multiprocessing.Process(target=voice)
+            p1.start()
+            p2.start()
+            p1.join()
+            p1.terminate()
+            p2.terminate()
         wea = random.randint(0, len(weapon_4) - 1)
         star = weapon_4[wea]
         have4.append(star)
         this_time4 = 0
     else:  # 三星
+        if status:
+            num = 3
+            p1 = multiprocessing.Process(target=shipin(num))
+            p2 = multiprocessing.Process(target=voice)
+            p1.start()
+            p2.start()
+            p1.join()
+            p1.terminate()
+            p2.terminate()
         wea = random.randint(0, len(weapon_3) - 1)
         star = weapon_3[wea]
-    # 不要使用p2的进程join()
 
     add(star, lb2)
 
@@ -67,15 +99,37 @@ def single(lb2):
 def ten(lb2):
     """十连函数"""
     global stone
+    global status
+    global star_status
+    # 用于记录用户是十连还是单抽
+    status = 0
     if stone >= 1600:
         del get[:]
         for num in range(0, 10):  # 操作十次
             single(lb2)
         stone -= 1600
         print(get)
+        if star_status == 4:
+            p1 = multiprocessing.Process(target=shipin(4))
+            p2 = multiprocessing.Process(target=voice)
+            p1.start()
+            p2.start()
+            p1.join()
+            p1.terminate()
+            p2.terminate()
+        else :
+            p1 = multiprocessing.Process(target=shipin(5))
+            p2 = multiprocessing.Process(target=voice)
+            p1.start()
+            p2.start()
+            p1.join()
+            p1.terminate()
+            p2.terminate()
     else:
         print('您的原石不足，请充值！')
-
+    # 重置抽卡状态
+    status = 1
+    star_status = 4
 
 def add(star, lb2):
     """每次抽卡完毕的常规操作"""
